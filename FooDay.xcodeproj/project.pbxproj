@@ -37,6 +37,42 @@
 			);
 			target = 2E462D762F4FBDF6006335EB /* FooDay */;
 		};
+		2E462DD72F4FBE6A006335EB /* Exceptions for "FooDay" folder in "FooDayTests" target */ = {
+			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
+			membershipExceptions = (
+				AdminViews.swift,
+				AppViewModel.swift,
+				AuthView.swift,
+				CartView.swift,
+				HomeView.swift,
+				MockDataService.swift,
+				Models.swift,
+				OrdersView.swift,
+				ProfileView.swift,
+				QuickBiteApp.swift,
+				RestaurantDetailView.swift,
+				XCODE_SETUP.md,
+			);
+			target = 2E462D872F4FBDF9006335EB /* FooDayTests */;
+		};
+		2E462DD82F4FBE6A006335EB /* Exceptions for "FooDay" folder in "FooDayUITests" target */ = {
+			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
+			membershipExceptions = (
+				AdminViews.swift,
+				AppViewModel.swift,
+				AuthView.swift,
+				CartView.swift,
+				HomeView.swift,
+				MockDataService.swift,
+				Models.swift,
+				OrdersView.swift,
+				ProfileView.swift,
+				QuickBiteApp.swift,
+				RestaurantDetailView.swift,
+				XCODE_SETUP.md,
+			);
+			target = 2E462D912F4FBDF9006335EB /* FooDayUITests */;
+		};
 /* End PBXFileSystemSynchronizedBuildFileExceptionSet section */
 
 /* Begin PBXFileSystemSynchronizedRootGroup section */
@@ -44,6 +80,8 @@
 			isa = PBXFileSystemSynchronizedRootGroup;
 			exceptions = (
 				2E462D9A2F4FBDF9006335EB /* Exceptions for "FooDay" folder in "FooDay" target */,
+				2E462DD72F4FBE6A006335EB /* Exceptions for "FooDay" folder in "FooDayTests" target */,
+				2E462DD82F4FBE6A006335EB /* Exceptions for "FooDay" folder in "FooDayUITests" target */,
 			);
 			path = FooDay;
 			sourceTree = "<group>";

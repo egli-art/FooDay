@@ -8,7 +8,7 @@
 import SwiftUI
 import SwiftData
 
-@main
+@MainActor
 struct FooDayApp: App {
     var sharedModelContainer: ModelContainer = {
         let schema = Schema([
@@ -25,7 +25,7 @@ struct FooDayApp: App {
 
     var body: some Scene {
         WindowGroup {
-            ContentView()
+            HomeView()
         }
         .modelContainer(sharedModelContainer)
     }
