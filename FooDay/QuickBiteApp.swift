@@ -1,8 +1,13 @@
 import SwiftUI
+import Firebase
 
 @main
 struct QuickBiteApp: App {
     @StateObject private var viewModel = AppViewModel()
+
+    init() {
+        FirebaseManager.shared.configure()
+    }
 
     var body: some Scene {
         WindowGroup {

@@ -3,13 +3,14 @@ import SwiftUI
 struct HomeView: View {
     @EnvironmentObject var viewModel: AppViewModel
     @State private var selectedCategory = "All"
+    @State private var restaurants: [Restaurant] = []
 
     private let categories = ["All", "🍔 Burgers", "🍕 Pizza", "🍣 Sushi", "🌮 Mexican", "🥗 Healthy"]
 
     private var filteredForCategory: [Restaurant] {
-        guard selectedCategory != "All" else { return viewModel.filteredRestaurants }
+        guard selectedCategory != "All" else { return restaurants }
         let keyword = selectedCategory.components(separatedBy: " ").last ?? ""
-        return viewModel.filteredRestaurants.filter {
+        return restaurants.filter {
             $0.cuisine.localizedCaseInsensitiveContains(keyword)
         }
     }
@@ -66,7 +67,7 @@ struct HomeView: View {
                                 .padding(.horizontal)
                             ScrollView(.horizontal, showsIndicators: false) {
                                 HStack(spacing: 14) {
-                                    ForEach(viewModel.filteredRestaurants.prefix(3)) { r in
+                                    ForEach(restaurants.prefix(3)) { r in
                                         NavigationLink(destination: RestaurantDetailView(restaurant: r)) {
                                             FeaturedCard(restaurant: r)
                                         }
@@ -95,6 +96,11 @@ struct HomeView: View {
                     .padding(.bottom, 24)
                 }
                 .padding(.top)
+            }
+            .onAppear {
+                FirebaseDataService.shared.fetchRestaurants { fetchedRestaurants in
+                    self.restaurants = fetchedRestaurants
+                }
             }
             .navigationTitle("QuickBite 🍽️")
             .navigationBarTitleDisplayMode(.inline)

@@ -1,9 +1,10 @@
 import Foundation
 import SwiftUI
+import FirebaseFirestoreSwift
 
 // MARK: - User
 struct User: Identifiable, Codable {
-    var id: String = UUID().uuidString
+    @DocumentID var id: String? = UUID().uuidString
     var name: String
     var email: String
     var phone: String
@@ -14,7 +15,7 @@ struct User: Identifiable, Codable {
 
 // MARK: - Restaurant
 struct Restaurant: Identifiable, Codable {
-    var id: String = UUID().uuidString
+    @DocumentID var id: String? = UUID().uuidString
     var name: String
     var cuisine: String
     var rating: Double
@@ -25,11 +26,25 @@ struct Restaurant: Identifiable, Codable {
     var menuItems: [MenuItem]
     var address: String
     var isActive: Bool = true
+    
+    enum CodingKeys: String, CodingKey {
+        case id
+        case name
+        case cuisine
+        case rating
+        case deliveryTime = "delivery_time"
+        case deliveryFee = "delivery_fee"
+        case imageName = "image_name"
+        case isOpen = "is_open"
+        case menuItems = "menu_items"
+        case address
+        case isActive = "is_active"
+    }
 }
 
 // MARK: - MenuItem
 struct MenuItem: Identifiable, Codable {
-    var id: String = UUID().uuidString
+    @DocumentID var id: String? = UUID().uuidString
     var name: String
     var description: String
     var price: Double
@@ -37,22 +52,41 @@ struct MenuItem: Identifiable, Codable {
     var imageName: String
     var isAvailable: Bool = true
     var isPopular: Bool = false
+    
+    enum CodingKeys: String, CodingKey {
+        case id
+        case name
+        case description
+        case price
+        case category
+        case imageName = "image_name"
+        case isAvailable = "is_available"
+        case isPopular = "is_popular"
+    }
 }
 
 // MARK: - CartItem
 struct CartItem: Identifiable, Codable {
-    var id: String = UUID().uuidString
+    @DocumentID var id: String? = UUID().uuidString
     var menuItem: MenuItem
     var quantity: Int
     var restaurantId: String
     var restaurantName: String
 
     var subtotal: Double { menuItem.price * Double(quantity) }
+    
+    enum CodingKeys: String, CodingKey {
+        case id
+        case menuItem = "menu_item"
+        case quantity
+        case restaurantId = "restaurant_id"
+        case restaurantName = "restaurant_name"
+    }
 }
 
 // MARK: - Order
 struct Order: Identifiable, Codable {
-    var id: String = UUID().uuidString
+    @DocumentID var id: String? = UUID().uuidString
     var userId: String
     var restaurantId: String
     var restaurantName: String
@@ -66,6 +100,23 @@ struct Order: Identifiable, Codable {
     var total: Double
     var paymentMethod: String
     var specialInstructions: String = ""
+    
+    enum CodingKeys: String, CodingKey {
+        case id
+        case userId = "user_id"
+        case restaurantId = "restaurant_id"
+        case restaurantName = "restaurant_name"
+        case items
+        case status
+        case createdAt = "created_at"
+        case estimatedDelivery = "estimated_delivery"
+        case deliveryAddress = "delivery_address"
+        case subtotal
+        case deliveryFee = "delivery_fee"
+        case total
+        case paymentMethod = "payment_method"
+        case specialInstructions = "special_instructions"
+    }
 }
 
 // MARK: - OrderStatus
